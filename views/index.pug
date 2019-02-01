@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  p(class="center") Welcome to my site. I like to make games.
+
+  if error
+    p Error getting game content.
+  else
+    p(class="center") Try out my awesome game!
+block scripts
+  script(src='/javascripts/doctorGame.js')
