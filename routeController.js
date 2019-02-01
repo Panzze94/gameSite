@@ -19,6 +19,10 @@ app.get('/', function(req, res) {
   res.render('game');
 });
 
+app.get('/submit', (req, res) => {
+  res.render('submit');
+});
+
 /* Route for scoreboard page*/
 app.get('/scoreBoard', (req, res) => {
   res.render('scoreBoard');

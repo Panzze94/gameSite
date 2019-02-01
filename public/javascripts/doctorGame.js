@@ -31,6 +31,9 @@ var score = 0;
 var gameOver = false;
 var scoreText;
 var endText;
+var button;
+var button2;
+
 // Game object
 var game = new Phaser.Game(config);
 // preloading the game
@@ -49,7 +52,7 @@ function preload ()
 //Creating the game components
 function create ()
 {
-    //  A simple background for our game
+    //  Background for the game
     this.add.image(400, 300, 'space');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
@@ -117,6 +120,9 @@ function create ()
 
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#999' });
+
+    //set highscore for the game
+    var highScore = localStorage.highScore
 
     //  Collide the Doctor, dalek and the sonics with the platforms
     this.physics.add.collider(player, platforms);
@@ -209,6 +215,19 @@ function collectsonic (player, sonic)
 
     }
 }
+//updating highscore if new record
+function checkScore(){
+  if (this.localStorage) {
+      localStorage.score = this.score;
+      if (localStorage.highScore) {
+          if (locaStorage.score > localStorage.highScore) {
+              localStorage.highScore = localStorage.score;
+          }
+      }
+      else {
+          localStorage.highScore = localStorage.highScore;
+      }
+  }}
 
 // What happens when a dalek hits a sonic
 function destroySonic (dalek,sonic) {
@@ -224,6 +243,14 @@ function hitBomb (player, bomb)
     endText = this.add.text(300, 200, 'You lost', { fontSize: '64px', fill: '#300' });
 
     player.anims.play('turn');
+
+    checkScore();
+    localStorage.setItem('score',score);
+    localStorage.setItem('highScore',highScore);
+    // options to continue
+    button = this.add.text(250, 320, 'Save highscore', {fontSize: '50px',  fill: '#FFFFFF' });
+
+    button2 = this.add.text(250,280, 'Play again', {fontSize: '50px', fill: '#00ff00'});
 
     gameOver = true;
 }
