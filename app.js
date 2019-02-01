@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var gameRouter = require('./routes/game');
-var scoreBoardRouter = require('./routes/scoreBoard');
 
 var app = express();
 
@@ -15,7 +13,9 @@ var app = express();
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://Panzze94:einari29@ds129321.mlab.com:29321/player_db';
 mongoose.connect(mongoDB);
+// Mongoose uses the global promise library
 mongoose.Promise = global.Promise;
+//Conntection and error handling
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -30,8 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/game', gameRouter);
-app.use('/scoreBoard', scoreBoardRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,10 +1,10 @@
 {
-  "name": "express-locallibrary-tutorial",
+  "name": "doctorGame",
   "version": "0.0.0",
+  "homepage": "https://github.com/Panzze94/gameSite",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www"
+    "devstart": "node ./routeController.js"
   },
   "dependencies": {
     "async": "^2.6.1",
@@ -20,6 +20,11 @@
     "phaser": "^3.15.1",
     "pug": "2.0.0-beta11"
   },
+  "main":"app.js",
+  "author": "",
+  "license": "ISC",
+
+
   "devDependencies": {
     "nodemon": "^1.18.6"
   }

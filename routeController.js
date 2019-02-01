@@ -5,14 +5,35 @@ var async = require('async');
 var express = require('express');
 var app = express();
 
+//listen to the port 8080 or user's choice in terminal
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`)
+})
+
+//we use pug in views
+app.set('view engine', 'pug');
+
 /* Route for home page. */
-router.get('/', function(req, res) {
-  res.redirect('/game');
+app.get('/', function(req, res) {
+  res.render('index');
 });
 
 /* Route for game page*/
-router.get('/', (req, res) => {
-  res.render('index', {
+app.get('/game', (req, res) => {
+  res.redirect('index', {
     title: 'The game'
 });
 });
+
+/* Route for scoreboard page*/
+app.get('/scoreBoard', (req, res) => {
+  res.render('scoreBoard', {
+    title: 'The Scoreboard'
+});
+});
+
+
+
+//use libraries, js and css- files etc
+app.use(express.static(__dirname + '/public'));
