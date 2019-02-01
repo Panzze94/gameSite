@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8080
 
 # Start service
-CMD [ "npm", "run", "devstart" ]
+CMD [ "npm", "run", "start" ]

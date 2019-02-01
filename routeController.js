@@ -16,15 +16,13 @@ app.set('view engine', 'pug');
 
 /* Route for home page. */
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('game');
 });
-
 
 /* Route for scoreboard page*/
 app.get('/scoreBoard', (req, res) => {
   res.render('scoreBoard');
 });
-
 
 
 //use libraries, js and css- files etc

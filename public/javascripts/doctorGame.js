@@ -26,6 +26,7 @@ var bombs;
 var sonicWaves;
 var platforms;
 var cursors;
+var highScore = 0;
 var score = 0;
 var gameOver = false;
 var scoreText;
@@ -36,7 +37,8 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     this.load.image('space', 'assets/space.jpg');
-    this.load.image('ground', 'assets/platform.png');
+    this.load.image('planetsurface', 'assets/surface.png');
+    this.load.image('moon','assets/surface_small.png')
     this.load.image('sonic', 'assets/sonic.png');
     this.load.image('bomb', 'assets/bomb.png');
     this.load.image('dalek','assets/dalek.png');
@@ -53,14 +55,16 @@ function create ()
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
 
-    //  Here we create the ground.
+    //  Here we create the ground of the planet.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(400, 568, 'planetsurface').setScale(2).refreshBody();
 
-    //  Now let's create some ledges
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    //  Other surfaces
+    platforms.create(700, 400, 'planetsurface');
+    platforms.create(-50, 250, 'planetsurface');
+    platforms.create(850, 220, 'planetsurface');
+    //smaller moon to jump on
+    platforms.create(450,200,'moon').setScale(1).refreshBody();
 
     // The player and its settings
     player = this.physics.add.sprite(100, 450, 'doctor');

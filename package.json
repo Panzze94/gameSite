@@ -4,7 +4,8 @@
   "homepage": "https://github.com/Panzze94/gameSite",
   "private": true,
   "scripts": {
-    "devstart": "node ./routeController.js"
+    "start": "node ./routeController.js",
+    "devstart": "nodemon ./routeController.js"
   },
   "dependencies": {
     "async": "^2.6.1",
