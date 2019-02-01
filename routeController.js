@@ -19,18 +19,10 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-/* Route for game page*/
-app.get('/Game', (req, res) => {
-  res.redirect('index', {
-    title: 'The game'
-});
-});
 
 /* Route for scoreboard page*/
 app.get('/scoreBoard', (req, res) => {
-  res.render('scoreBoard', {
-    title: 'The Scoreboard'
-});
+  res.render('scoreBoard');
 });
 
 
