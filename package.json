@@ -20,12 +20,10 @@
     "phaser": "^3.15.1",
     "pug": "2.0.0-beta11"
   },
-  "main":"app.js",
+  "main": "app.js",
   "author": "",
   "license": "ISC",
-
-
   "devDependencies": {
-    "nodemon": "^1.18.6"
+    "nodemon": "^1.18.9"
   }
 }

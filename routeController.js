@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 });
 
 /* Route for game page*/
-app.get('/game', (req, res) => {
+app.get('/Game', (req, res) => {
   res.redirect('index', {
     title: 'The game'
 });
