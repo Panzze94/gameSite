@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  h3(class="center") Welcome to my site. I like to make games.
+  #app
+    h3.center Welcome to my site. I like to make games.
 
-  if error
-    p Error getting game content.
-  else
-    p(class="center") Try out my awesome game!
-block scripts
+    if error
+      p Error getting game content.
+    else
+      p.center Try out my awesome game!
   script(src='/javascripts/doctorGame.js')

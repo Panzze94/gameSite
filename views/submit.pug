@@ -1,6 +1,28 @@
 extends layout
 
-block scripts
-  script(src='/javascripts/submit.js')
+block content
 
-  p gaigaisgisg
+  #app.container
+    .row
+      h3.center Submit your score!
+
+    main
+      .form__item.row
+        .col.s5
+          span
+            input.form__field(type='text', v-model='itemName', placeholder='Add your username and score', v-on:keyup.13='addItem')
+        .col.s5
+          span
+            p Your best score was {{highScore}}
+        .col.s1
+          span
+            a.btn-floating.indigo.darken-2(v-on:click='addItem')
+              i.material-icons add
+      .row
+        ul.collection(v-if='players.length')
+          li.collection__item(v-for='(player, index) in players')
+            h4.black-text.flow-text {{ player }}
+
+    div
+      span
+        a(href='/') Back to Game

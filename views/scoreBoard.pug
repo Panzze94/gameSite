@@ -1,9 +1,12 @@
 extends layout
 
 block content
-  h1(class="center") Check out who are the best players today.
 
-#app.container
-
-block scripts
-  script(src='/javascripts/scoreBoard.js')
+  #app.container
+      .row
+        h3.center See Who's who
+      main
+        .row
+          ul.collection(v-if='players.length')
+            li.collection__item(v-for='(player, index) in players')
+              h4.blue-text.flow-text {{ player }}

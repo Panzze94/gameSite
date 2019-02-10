@@ -1,4 +1,4 @@
-"use strict";
+
 
 // Game configuration, Canvas
 var config = {
@@ -18,7 +18,8 @@ var config = {
         update: update
     }
 };
-// Declared variables in the game
+"use strict";
+// Variables in the game
 var player;
 var daleks;
 var sonics;
@@ -26,11 +27,10 @@ var bombs;
 var sonicWaves;
 var platforms;
 var cursors;
-var highScore = 0;
 var score = 0;
+var highScore = 0;
 var gameOver = false;
 var scoreText;
-var endText;
 var button;
 var button2;
 
@@ -57,6 +57,9 @@ function create ()
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
+
+    //set highscore for the game
+    var highScore = localStorage.highScore
 
     //  Here we create the ground of the planet.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
@@ -97,7 +100,7 @@ function create ()
         repeat: -1
     });
 
-    //  Input Events
+    //  Input keyboard to move the player
     cursors = this.input.keyboard.createCursorKeys();
 
     //  Some sonics to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
@@ -121,8 +124,6 @@ function create ()
     //  The score
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#999' });
 
-    //set highscore for the game
-    var highScore = localStorage.highScore
 
     //  Collide the Doctor, dalek and the sonics with the platforms
     this.physics.add.collider(player, platforms);
@@ -137,7 +138,7 @@ function create ()
     this.physics.add.collider(player, daleks, hitBomb, null, this);
 
     // Checks if dalek overlaps with sonics
-    this.physics.add.overlap(daleks, sonics, destroySonic, null, this);
+    // this.physics.add.overlap(daleks, sonics, destroySonic, null, this);
 }
 
 
@@ -148,41 +149,44 @@ function update ()
     {
         return;
     }
-
+//moving left
     if (cursors.left.isDown)
     {
         player.setVelocityX(-180);
 
         player.anims.play('left', true);
 
-        if (cursors.right.spaceKey)
-        {
-          useSonic();
-        }
+// tried to make the doctor to use the sonic but that will be in the next edition
+        // if (cursors.right.spaceKey)
+        // {
+        //   useSonic();
+        // }
     }
+    // moving right
     else if (cursors.right.isDown)
     {
         player.setVelocityX(180);
 
         player.anims.play('right', true);
-        if (cursors.left.spaceKey)
-        {
-          useSonic();
-        }
+        // if (cursors.left.spaceKey)
+        // {
+        //   useSonic();
+        // }
     }
+    // stopping and facing the screen if not moving
     else
     {
         player.setVelocityX(0);
 
         player.anims.play('turn');
     }
-
+// jumping
     if (cursors.up.isDown && player.body.touching.down)
     {
         player.setVelocityY(-330);
     }
 }
-
+// collecting sonics and counting the points
 function collectsonic (player, sonic)
 {
     sonic.disableBody(true, true);
@@ -215,48 +219,53 @@ function collectsonic (player, sonic)
 
     }
 }
-//updating highscore if new record
-function checkScore(){
+// updating highscore if new record
+function checkScore() {
   if (this.localStorage) {
-      localStorage.score = this.score;
+      localStorage.setItem('score',score);
       if (localStorage.highScore) {
-          if (locaStorage.score > localStorage.highScore) {
-              localStorage.highScore = localStorage.score;
+          if (score > localStorage.highScore) {
+              localStorage.setItem('highScore',score);
           }
       }
       else {
-          localStorage.highScore = localStorage.highScore;
+
       }
   }}
 
-// What happens when a dalek hits a sonic
+
+// // What happens when a dalek hits a sonic
 function destroySonic (dalek,sonic) {
   sonic.disableBody(true, true);
 }
-// What happens when player hits a bomb
-function hitBomb (player, bomb)
+function hitBomb (player, bomb) //end of the game
 {
+    //player turns around, turns red and physics pause
     this.physics.pause();
-
     player.setTint(0xff0000);
-
-    endText = this.add.text(300, 200, 'You lost', { fontSize: '64px', fill: '#300' });
-
     player.anims.play('turn');
 
+    // update highscore
     checkScore();
-    localStorage.setItem('score',score);
-    localStorage.setItem('highScore',highScore);
+
     // options to continue
     button = this.add.text(250, 320, 'Save highscore', {fontSize: '50px',  fill: '#FFFFFF' });
-
     button2 = this.add.text(250,280, 'Play again', {fontSize: '50px', fill: '#00ff00'});
+
+    //button pressed -> move to score page or play again
+    button.setInteractive()
+    button.on('pointerdown', () => location.href='/submit');
+
+    button2.setInteractive()
+    button2.on('pointerdown', () => location.href='/');
 
     gameOver = true;
 }
-function useSonics () {
 
-  var sonicWave = sonicWawes.create(200, 200, 'sonicWawe');
-  sonicWave.setVelocityX(100);
-  sonicWave.allowGravity = false;
-}
+// next edition, using the sonic
+// function useSonics () {
+//
+//   var sonicWave = sonicWawes.create(200, 200, 'sonicWawe');
+//   sonicWave.setVelocityX(100);
+//   sonicWave.allowGravity = false;
+// }
