@@ -4,7 +4,9 @@
   "homepage": "https://github.com/Panzze94/gameSite",
   "private": true,
   "scripts": {
-    "start": "node ./routeController.js"
+    "start": "node ./routeController.js",
+    "devstart": "node ./routeController.js"
+
 
   },
   "dependencies": {
