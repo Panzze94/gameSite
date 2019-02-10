@@ -44,18 +44,6 @@ var app = new Vue ({
           localStorage.setItem('players', parsed);
             },
 
-      checkForm: function (e) {
-
-      this.errors = [];
-      if (!this.itemName) {
-        this.errors.push("player required.");
-      } else if (!this.validName(this.itemName)) {
-        this.errors.push('Valid player required.');
-         }
-         if(!this.errors.length) return true;
-              e.preventDefault();
-
-       }
      },
    }
   )})

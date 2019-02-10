@@ -6,7 +6,7 @@ block content
       .row
         h3.center See Who's who
       main
-        .row
+        .row.indigo-green
           ul.collection(v-if='players.length')
             li.collection__item(v-for='(player, index) in players')
-              h4.blue-text.flow-text {{ player }}
+              h4.black-text.flow-text {{ player }}

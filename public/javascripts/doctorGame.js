@@ -58,9 +58,6 @@ function create ()
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
 
-    //set highscore for the game
-    var highScore = localStorage.highScore
-
     //  Here we create the ground of the planet.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     platforms.create(400, 568, 'planetsurface').setScale(2).refreshBody();
@@ -122,7 +119,7 @@ function create ()
     daleks = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#999' });
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFFFFF' });
 
 
     //  Collide the Doctor, dalek and the sonics with the platforms
@@ -138,7 +135,7 @@ function create ()
     this.physics.add.collider(player, daleks, hitBomb, null, this);
 
     // Checks if dalek overlaps with sonics
-    // this.physics.add.overlap(daleks, sonics, destroySonic, null, this);
+    this.physics.add.overlap(daleks, sonics, destroySonic, null, this);
 }
 
 
@@ -229,7 +226,7 @@ function checkScore() {
           }
       }
       else {
-
+        localStorage.setItem('highScore',score);
       }
   }}
 
@@ -250,7 +247,7 @@ function hitBomb (player, bomb) //end of the game
 
     // options to continue
     button = this.add.text(250, 320, 'Save highscore', {fontSize: '50px',  fill: '#FFFFFF' });
-    button2 = this.add.text(250,280, 'Play again', {fontSize: '50px', fill: '#00ff00'});
+    button2 = this.add.text(250,240, 'Play again', {fontSize: '50px', fill: '0x33FF00'});
 
     //button pressed -> move to score page or play again
     button.setInteractive()
