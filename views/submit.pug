@@ -7,10 +7,10 @@ block content
       h3.center Submit your score!
 
     main
-      .form__item.row
+      .form_item.row
         .col.s7
           span
-            input.form__field(type='text', v-model='itemName', placeholder='Add your username and score', v-on:keyup.13='addItem')
+            input.form_field(type='text', v-model='itemName', placeholder='Add your username and score', v-on:keyup.13='addItem')
         .col.s3
           span
             p Your best score was {{highScore}}
@@ -19,8 +19,8 @@ block content
             a.btn-floating.indigo.darken-2(v-on:click='addItem')
               i.material-icons add
       .row
-        ul.collection(v-if='players.length')
-          li.collection__item(v-for='(player, index) in players')
+        ul(v-if='players.length')
+          li(v-for='(player, index) in players')
             h4.black-text.flow-text {{ player }}
 
     div
